@@ -194,7 +194,7 @@ def load_data(ds_name, use_node_labels, use_node_attributes, degree_as_tag = Fal
     if degree_as_tag : 
         x = A.sum(axis=1)
         enc = OneHotEncoder(sparse=False)
-        x = enc.fit_transform(x)
+        x = enc.fit_transform(np.array(x))
         xx.append(x)
     elif not use_node_labels and not use_node_attributes and not degree_as_tag:
         x = np.ones((A.shape[0], 1))

@@ -161,6 +161,7 @@ def main():
                     val_loss = val_loss / len(val_loader.dataset)
 
                     if early_stopper.stop(epoch, val_loss, val_acc) : 
+                        # torch.save(model.state_dict(), os.path.join('models', args.dataset, f'best_model_fold_{it+1}.pth'))
                         break
 
                     best_acc_across_folds = early_stopper.val_acc if  early_stopper.val_acc > best_acc_across_folds else best_acc_across_folds
@@ -188,7 +189,7 @@ def main():
         cnt = 1
 
         model = PathNN(features_dim, best_config['hidden_dim'], args.cutoff, n_classes, best_config["dropout"], device,
-                                    use_nn = args.remove_nn, residuals = args.residuals, encode_distances=encode_distances).to(device)
+                                     residuals = args.residuals, encode_distances=encode_distances).to(device)
             
         for jj in range(3) :
 
